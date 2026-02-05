@@ -6,7 +6,7 @@ This tap contains :
 
 ## Compatibility
 
-* [Homebrew] (https://brew.sh/)
+* [Homebrew](https://brew.sh/)
 * [Linuxbrew](http://linuxbrew.sh/)
 
 ## How do I install these formulae ?

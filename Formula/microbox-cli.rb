@@ -2,18 +2,30 @@ class MicroboxCli < Formula
 
     desc "Microbox command line interface, provides utilities to manage microservices git repositories"
     homepage "https://github.com/VanRoy/microcli"
-    version "1.0.0"
+    version "1.1.0"
+
+    os = OS.mac? ? "darwin" : "linux"
+    arch = Hardware::CPU.arm? ? "arm64" : "amd64"
 
     if OS.mac?
-        url "https://github.com/VanRoy/microcli/releases/download/v1.0.0/mbx_darwin_amd64"
-        sha256 "3f48941a47b2499b47093c6d3cc10226214e82c85d7d02ab4a115a8d9406c9e4"
+        if Hardware::CPU.arm?
+            sha256 "279d42bbf1461aa5f6e698f070039f97ac6acfa9dcdf36c06e8b0d132d6811b5"
+        else
+            sha256 "9c7720bb45d4d9f517e766a762a8f9b45b4c7a8444a31b982daa7c7a9ac76182"
+        end
     elsif OS.linux?
-        url "https://github.com/VanRoy/microcli/releases/download/v1.0.0/mbx_linux_amd64"
-        sha256 "da74cfe9bcaa44acafe85ce35594f3c888607aa6a678838d3b57a1ac900f7777"
+        if Hardware::CPU.arm?
+            sha256 "e0d94d823e1dcc222e994a54bce88371211651a5f163852697a1794a17b4861e"
+        else
+            sha256 "2327dadd508d933eed12cc3062f4ddf18e3a0bdf555349493441234822468217"
+        end
     end
+
+    url "https://github.com/VanRoy/microcli/releases/download/v#{version}/mbx_#{os}_#{arch}"
 
     def install
         os = OS.mac? ? "darwin" : "linux"
-        bin.install "mbx_#{os}_amd64" => "mbx"
+        arch = Hardware::CPU.arm? ? "arm64" : "amd64"
+        bin.install "mbx_#{os}_#{arch}" => "mbx"
       end
   end
